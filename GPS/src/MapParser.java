@@ -5,51 +5,51 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Class to read and parse cartography files into a distance matrix
- * and a list of city names.
+ * Clase para leer y analizar archivos de cartografía en una matriz de distancias
+ * y una lista de nombres de ciudades.
  */
 public class MapParser {
     
     /**
-     * Reads a cartography file and parses it into a distance matrix and a list of city names.
+     * Lee un archivo de cartografía y lo analiza en una matriz de distancias y una lista de nombres de ciudades.
      * 
-     * @param filename The name of the file to read
-     * @return An array where the first element is the list of city names and the second is the distance matrix
-     * @throws IOException If there is an error reading the file
+     * @param filename El nombre del archivo a leer
+     * @return Un array donde el primer elemento es la lista de nombres de ciudades y el segundo es la matriz de distancias
+     * @throws IOException Si hay un error al leer el archivo
      */
     public static Object[] parseMapFile(String filename) throws IOException {
         List<String> cityNames = new ArrayList<>();
         List<List<Double>> distanceRows = new ArrayList<>();
         
         try (BufferedReader reader = new BufferedReader(new FileReader(filename))) {
-            // Read number of cities
+            // Leer número de ciudades
             int numCities = Integer.parseInt(reader.readLine().trim());
             
-            // Read each city line
+            // Leer cada línea de ciudad
             String line;
             while ((line = reader.readLine()) != null) {
                 String[] parts = line.split(";");
                 if (parts.length < 2) {
-                    continue; // Skip invalid lines
+                    continue; // Omitir líneas inválidas
                 }
                 
-                // First part is the city name
+                // La primera parte es el nombre de la ciudad
                 String cityName = parts[0].trim();
                 cityNames.add(cityName);
                 
-                // Parse distances
+                // Analizar distancias
                 List<Double> distances = new ArrayList<>();
                 for (int i = 1; i < parts.length; i++) {
                     String distanceStr = parts[i].trim();
                     
-                    // Handle city names with distances in format CityName(Distance)
+                    // Manejar nombres de ciudades con distancias en formato CiudadNombre(Distancia)
                     if (distanceStr.contains("(") && distanceStr.endsWith(")")) {
                         int openParenIndex = distanceStr.lastIndexOf("(");
                         int closeParenIndex = distanceStr.length() - 1;
                         String distanceValue = distanceStr.substring(openParenIndex + 1, closeParenIndex);
                         distances.add(Double.parseDouble(distanceValue));
                     } else {
-                        // If the format is direct distances
+                        // Si el formato es de distancias directas
                         distances.add(Double.parseDouble(distanceStr));
                     }
                 }
@@ -58,7 +58,7 @@ public class MapParser {
             }
         }
         
-        // Convert List<List<Double>> to double[][]
+        // Convertir List<List<Double>> a double[][]
         double[][] distanceMatrix = new double[cityNames.size()][cityNames.size()];
         for (int i = 0; i < distanceRows.size(); i++) {
             List<Double> row = distanceRows.get(i);
@@ -71,22 +71,22 @@ public class MapParser {
     }
     
     /**
-     * Prints the distance matrix for debugging purposes.
+     * Imprime la matriz de distancias para propósitos de depuración.
      * 
-     * @param cityNames List of city names
-     * @param distanceMatrix Distance matrix between cities
+     * @param cityNames Lista de nombres de ciudades
+     * @param distanceMatrix Matriz de distancias entre ciudades
      */
     public static void printDistanceMatrix(List<String> cityNames, double[][] distanceMatrix) {
-        System.out.println("Distance Matrix:");
+        System.out.println("Matriz de Distancias:");
         
-        // Print header row with city names
+        // Imprimir fila de encabezado con nombres de ciudades
         System.out.print("\t");
         for (String city : cityNames) {
             System.out.print(city + "\t");
         }
         System.out.println();
         
-        // Print each row
+        // Imprimir cada fila
         for (int i = 0; i < cityNames.size(); i++) {
             System.out.print(cityNames.get(i) + "\t");
             for (int j = 0; j < cityNames.size(); j++) {

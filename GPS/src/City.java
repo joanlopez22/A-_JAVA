@@ -2,20 +2,20 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Represents a city in the GPS system.
- * This class is used as a node in the A* algorithm.
+ * Representa una ciudad en el sistema GPS.
+ * Esta clase se utiliza como un nodo en el algoritmo A*.
  */
 public class City implements Comparable<City> {
     private String name;
-    private double g; // Cost from start node to this node
-    private double h; // Heuristic cost from this node to goal
-    private double f; // Total cost (g + h)
+    private double g; // Costo desde el nodo inicial hasta este nodo
+    private double h; // Costo heurístico desde este nodo hasta la meta
+    private double f; // Costo total (g + h)
     private City parent;
     private List<String> path;
 
     /**
-     * Constructor for the City class
-     * @param name The name of the city
+     * Constructor para la clase City
+     * @param name El nombre de la ciudad
      */
     public City(String name) {
         this.name = name;
@@ -28,11 +28,11 @@ public class City implements Comparable<City> {
     }
 
     /**
-     * Constructor with all parameters
-     * @param name The name of the city
-     * @param g Cost from start to this node
-     * @param h Heuristic cost from this node to goal
-     * @param parent Parent node in the path
+     * Constructor con todos los parámetros
+     * @param name El nombre de la ciudad
+     * @param g Costo desde el inicio hasta este nodo
+     * @param h Costo heurístico desde este nodo hasta la meta
+     * @param parent Nodo padre en el camino
      */
     public City(String name, double g, double h, City parent) {
         this.name = name;
@@ -47,7 +47,7 @@ public class City implements Comparable<City> {
         this.path.add(name);
     }
 
-    // Getters and setters
+    // Getters y setters
     public String getName() {
         return name;
     }
@@ -92,7 +92,7 @@ public class City implements Comparable<City> {
     }
 
     /**
-     * Compare cities based on their f value (for priority queue)
+     * Compara ciudades basándose en su valor f (para la cola de prioridad)
      */
     @Override
     public int compareTo(City other) {

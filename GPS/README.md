@@ -1,72 +1,72 @@
-# GPS Route Finder
+# Buscador de Rutas GPS
 
-This application finds optimal routes between cities using the A* algorithm. It reads cartography files containing distances between cities and calculates the shortest path between a source and destination city.
+Esta aplicación encuentra rutas óptimas entre ciudades utilizando el algoritmo A*. Lee archivos de cartografía con distancias entre ciudades y calcula el camino más corto entre una ciudad de origen y una de destino.
 
-## Features
+## Características
 
-- Load cartography from custom map files
-- Find optimal routes between cities
-- Find routes with mandatory intermediate cities
-- Create sample cartography files with real distances
+- Cargar cartografía desde archivos de mapas personalizados
+- Encontrar rutas óptimas entre ciudades
+- Encontrar rutas con ciudades intermedias obligatorias
+- Crear archivos de cartografía de ejemplo con distancias reales
 
-## File Format
+## Formato de Archivo
 
-The cartography files should follow this format:
+Los archivos de cartografía deben seguir este formato:
 
 ```
-N (number of cities)
-City1;Distance1;Distance2;...;DistanceN
-City2;Distance1;Distance2;...;DistanceN
+N (número de ciudades)
+Ciudad1;Distancia1;Distancia2;...;DistanciaN
+Ciudad2;Distancia1;Distancia2;...;DistanciaN
 ...
-CityN;Distance1;Distance2;...;DistanceN
+CiudadN;Distancia1;Distancia2;...;DistanciaN
 ```
 
-Where:
-- Distances are in kilometers
-- A distance of 0 means the city to itself
-- A distance of -1 means no direct connection
-- A positive distance means a direct route exists
+Donde:
+- Las distancias están en kilómetros
+- Una distancia de 0 significa la ciudad a sí misma
+- Una distancia de -1 significa que no hay conexión directa
+- Una distancia positiva significa que existe una ruta directa
 
-## How to Run
+## Cómo Ejecutar
 
-1. Compile the Java files:
+1. Compilar los archivos Java:
 ```
 javac -d bin src/*.java
 ```
 
-2. Run the application:
+2. Ejecutar la aplicación:
 ```
 java -cp bin GPS
 ```
 
-3. Follow the menu options to:
-   - Load a cartography file
-   - Find optimal routes
-   - Create sample cartography files
+3. Seguir las opciones del menú para:
+   - Cargar un archivo de cartografía
+   - Encontrar rutas óptimas
+   - Crear archivos de cartografía de ejemplo
 
-## A* Algorithm Implementation
+## Implementación del Algoritmo A*
 
-The A* algorithm is implemented in the `AStar.java` file. The algorithm uses:
+El algoritmo A* está implementado en el archivo `AStar.java`. El algoritmo utiliza:
 
-- A priority queue for the open set (to be evaluated)
-- A set for the closed set (already evaluated)
-- The f(n) = g(n) + h(n) formula where:
-  - g(n) is the cost from start to the current node
-  - h(n) is the heuristic (estimated cost from current to goal)
+- Una cola de prioridad para el conjunto abierto (nodos por evaluar)
+- Un conjunto para el conjunto cerrado (nodos ya evaluados)
+- La fórmula f(n) = g(n) + h(n) donde:
+  - g(n) es el costo desde el inicio hasta el nodo actual
+  - h(n) es la heurística (costo estimado desde el nodo actual hasta la meta)
 
-In this implementation, the heuristic is set to 0, making the algorithm behave like Dijkstra's algorithm. This ensures that the shortest path is always found.
+En esta implementación, la heurística se establece en 0, haciendo que el algoritmo se comporte como el algoritmo de Dijkstra. Esto garantiza que siempre se encuentre el camino más corto.
 
-## Project Structure
+## Estructura del Proyecto
 
-- `GPS.java`: Main class with user interface
-- `City.java`: Represents a city (node) in the A* algorithm
-- `AStar.java`: Implementation of the A* algorithm
-- `MapParser.java`: Utility to read and parse cartography files
+- `GPS.java`: Clase principal con interfaz de usuario
+- `City.java`: Representa una ciudad (nodo) en el algoritmo A*
+- `AStar.java`: Implementación del algoritmo A*
+- `MapParser.java`: Utilidad para leer y analizar archivos de cartografía
 
-## Sample Cartography
+## Cartografía de Ejemplo
 
-The application can generate a sample cartography file for Spain with real distances between major cities.
+La aplicación puede generar un archivo de cartografía de ejemplo para España con distancias reales entre las principales ciudades.
 
-## Author
+## Autor
 
-Created for a university assignment. 
+Creado para un trabajo universitario. 
